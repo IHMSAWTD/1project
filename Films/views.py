@@ -7,7 +7,7 @@ from .forms import *
 from .models import *
 from django.db.models import Count
 
-class FilmsByCassssssssssstegories(ListView):
+class WatchList(ListView):
     paginate_by = 2
     model = Film
     context_object_name = 'films'
