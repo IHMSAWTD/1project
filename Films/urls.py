@@ -8,8 +8,8 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', LoginUser, name='login'),
     path('logout/',LogoutUser,name='logout'),
-    path('category/<int:category_id>',search_category,name = 'category'),
-    path('watch/',WatchList.as_view(),name = 'watchlist')
+    path('watch/',WatchList.as_view(),name = 'watchlist'),
+    path('category/<slug:category_id>/',Search_category.as_view(),name ='category')
 
 ]
 
