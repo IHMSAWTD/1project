@@ -6,6 +6,8 @@ from django.contrib.auth import login,logout
 from .forms import *
 from .models import *
 from django.db.models import Count
+from django.core.paginator import Paginator
+
 
 class WatchList(ListView):
     paginate_by = 2
@@ -23,20 +25,36 @@ class WatchList(ListView):
         context['categories'] = Category.objects.all()
         return context
 
+class Search_category(ListView):
+    paginate_by = 2
+    model = Film
+    context_object_name = 'films'
+    template_name = 'Film/search.html'
 
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get("paginate_by", self.paginate_by)
+    def get_queryset(self):
+        return Film.objects.filter(category=self.kwargs['category_id'])
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 def search_category(request, category_id):
 
     films = Film.objects.filter(category=category_id)
     categories = Category.objects.all()
     category = Category.objects.get(pk=category_id)
+    paginator = Paginator(films,1)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
 
     context = {
-
+        'page_obj':page_obj,
         'films': films,
         'categories': categories,
 
     }
-    return render(request, template_name='Film/category.html', context=context)
+    return render(request, template_name='Film/search.html', context=context)
 
 
 def register(request):
