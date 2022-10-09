@@ -1,0 +1,33 @@
+{% block menu %}
+<header class="header-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" col-md-11">
+                    <div class="main-menu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="{% url 'Home' %}">Главная</a></li>
+                            <li><a href='{% url 'wotch' %}'>Фильмы</a></li>
+                            <li><a href="./blog.html">Сериалы</a></li>
+                            <li><a href="./gallery.html">Kinostar+</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Naoh</a></li>
+                                    <li><a href="#">Padis</a></li>
+                                    <li><a href="#">Jacob</a></li>
+                                    <li><a href="#">Gomez</a></li>
+                                </ul>
+                            </li>
+                            {% if  request.user.is_authenticated %}
+                            <li><a href="#">Профиль</a></li>
+                            <li><a href="{% url 'logout' %}">Выход</a></li>
+                             {% else %}
+                            <li><a href="{% url 'login' %}">Вход</a></li>
+                             <li><a href="{% url 'register' %}">Регистрация</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+{% endblock %}

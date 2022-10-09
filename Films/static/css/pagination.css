@@ -1,0 +1,84 @@
+.demo{ background-color: #191919; }
+.pagination-outer{ text-align: center; }
+.pagination{
+    font-family: 'Kodchasan', sans-serif;
+    border-radius: 40px;
+    border: 2px solid #FE1739;
+    overflow: hidden;
+    display: inline-flex;
+    position: static;
+}
+.pagination li a.page-link{
+    color: #fff;
+    background-color: transparent;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 43px;
+    height: 45px;
+    width: 55px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    position: relative;
+    z-index: 1;
+}
+.pagination li.active a.page-link,
+.pagination li a.page-link:hover,
+.pagination li.active a.page-link:hover{
+    color: #fff;
+    background: transparent;
+    border: none;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+    content: '';
+    height: 100%;
+    width: 100%;
+    border: 1px solid #000;
+    border-top: none;
+    border-bottom: none;
+    transform: skewX(-16deg);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.3s;
+}
+.pagination li a.page-link:after{
+    background-color: #FE1739;
+    border: none;
+    border-radius: 50%;
+    transform: skewX(-16deg) scale(0);
+}
+.pagination li.active a.page-link:after,
+.pagination li a.page-link:hover:after,
+.pagination li.active a.page-link:hover:after{
+    border-radius: 0;
+    transform: skewX(-16deg) scale(1);
+}
+.pagination li:first-child a.page-link:before,
+.pagination li:last-child a.page-link:before{
+    display: none;
+}
+.pagination li:first-child a.page-link:after{ left: -1px; }
+.pagination li:last-child a.page-link:after{
+    left: auto;
+    right: -1px;
+}
+@media only screen and (max-width: 480px){
+    .pagination{
+        padding: 10px 0;
+        margin: 0;
+        display: block;
+    }
+    .pagination li{ display: inline-block; }
+    .pagination li a.page-link:before{ display: none; }
+    .pagination li a.page-link:after{ transform: skew(0) scale(0); }
+    .pagination li.active a.page-link:hover:after,
+    .pagination li.active a.page-link:after,
+    .pagination li a.page-link:hover:after{
+        border-radius: 20px;
+        transform: skew(0) scale(1);
+    }
+}

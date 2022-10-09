@@ -1,0 +1,218 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://bootstraptema.ru/snippets/menu/2017/vam.md.css"/>
+<script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="https://bootstraptema.ru/snippets/menu/2017/vam.md.js"></script>
+
+<style>
+    @font-face {
+        font-family: 'Roboto';
+        src: local('Roboto'), local('Roboto-Regular'), url('https://bootstraptema.ru/snippets/font/2016/roboto/roboto.woff2') format('woff2'), url('https://bootstraptema.ru/snippets/font/2016/roboto/roboto.woff') format('woff'), url('https://bootstraptema.ru/snippets/font/2016/roboto/roboto.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .blog_box h3 {
+        font: 300 20px/25px Roboto, sans-serif;
+        text-transform: uppercase;
+        margin-top: 1em;
+    }
+
+    .blog_box h3 a {
+        color: #FFFFFF;
+    }
+
+    .blog_box h3 a:hover {
+        color: #2cb149;
+        text-decoration: none;
+    }
+
+    .blog_box p {
+        font: 300 16px/25px Roboto, sans-serif;
+        color: #999;
+        line-height: 1.8em;
+        margin-bottom: 2em;
+    }
+
+    .blog_box {
+        margin-bottom: 2em;
+    }
+
+    .links {
+        padding: 0.5em 0;
+    }
+
+    .links ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    .links li {
+        padding: 0;
+        list-style: none;
+    }
+
+    .links ul li {
+        display: inline-block;
+        margin-right: 20px;
+        font: 300 16px/25px Roboto, sans-serif;
+        color: #999;
+    }
+
+    i.blog-icon {
+        color: #2cb149;
+        margin-right: 10px;
+    }
+
+    a.mask {
+        text-decoration: none;
+        overflow: hidden;
+        display: block;
+    }
+
+    img.zoom-img:hover {
+        -webkit-transform: scale(1.15);
+        -webkit-transition-timing-function: ease-out;
+        -webkit-transition-duration: 750ms;
+        -moz-transform: scale(1.15);
+        -moz-transition-timing-function: ease-out;
+        -moz-transition-duration: 750ms;
+        overflow: hidden;
+    }
+
+    img.zoom-img {
+        -webkit-transform: scale(1, 1);
+        -webkit-transition-timing-function: ease-out;
+        -webkit-transition-duration: 250ms;
+        -moz-transform: scale(1, 1);
+        -moz-transition-timing-function: ease-out;
+        -moz-transition-duration: 250ms;
+    }
+
+
+
+    .btn1:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+    .btn-8 {
+        display: block;
+        background: #ffde00;
+        outline: 1px solid transparent;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+</style>
+{% include 'inc/_css.html' %}
+{% include 'inc/_menu.html' %}
+<section class="services-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="jquery-accordion-menu" class="jquery-accordion-menu black">
+                    <div class="jquery-accordion-menu-header" id="form"></div>
+                    <ul id="demo-list">
+
+                       {% for category in categories %}
+                        <li><a href="{% url 'category' category.pk %}"><i class="fa fa-file-image-o"></i>{{ category.title }} </a>
+                            <span class="jquery-accordion-menu-label">{{ 0 }} </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="jquery-accordion-menu-footer">
+                        Footer
+                    </div>
+                </div>
+
+            </div><!-- ./col-md-4 col-md-offset-4 -->
+
+
+            <div class="col-md-9">
+                {% for film in films %}
+                <div class="col-md-10 blog_box fa-border border-dark">
+                    <a href="#" class="mask">
+                        <img src="{{ film.prewiew.url }}" alt="image"
+                             class="img-responsive zoom-img"/>
+                    </a>
+                    <div class="text-lg-left">
+                        <h3><a href="single.html">{{ film.filmName }} {{ films.count }}</a></h3>
+                    </div>
+
+                    <div class="links">
+                        <ul>
+                            <li><i class="fa blog-icon fa-calendar"> </i><span>Дата выхода : {{ film.created_at }}</span></li>
+                            <li><i class="fa blog-icon fa-user"> </i><span>Оценка зрителей : {{ film.rating }}</span></li>
+                            <li><i class="fa blog-icon fa-comment"> </i><span>Количество комментариев :</span>  <a href="#"><span> 44</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <p>{{ film.description }}</p>
+                    <a href="{{ film.get_absolute_url }}" class="btn1 btn-8 btn-8c primary-btn">Смотреть</a>
+                    <div class="clearfix"></div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div><!-- ./row -->
+    </div><!-- ./container -->
+</section>
+
+
+<script type="text/javascript">
+    //обработчик
+    jQuery(document).ready(function () {
+        jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+
+    });
+    //активный класс
+    $(function () {
+        $("#demo-list li").click(function () {
+            $("#demo-list li.active").removeClass("active")
+            $(this).addClass("active");
+        })
+    })
+</script>
+
+<script type="text/javascript">
+    //поисковая строка
+    (function ($) {
+        $.expr[":"].Contains = function (a, i, m) {
+            return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+        };
+
+        function filterList(header, list) {
+            var form = $("<form>").attr({
+                "class": "filterform",
+                action: "#"
+            }), input = $("<input>").attr({
+                "class": "filterinput",
+                type: "text"
+            });
+            $(form).append(input).appendTo(header);
+            $(input).change(function () {
+                var filter = $(this).val();
+                if (filter) {
+                    $matches = $(list).find("a:Contains(" + filter + ")").parent();
+                    $("li", list).not($matches).slideUp();
+                    $matches.slideDown();
+                } else {
+                    $(list).find("li").slideDown();
+                }
+                return false;
+            }).keyup(function () {
+                $(this).change();
+            });
+        }
+
+        $(function () {
+            filterList($("#form"), $("#demo-list"));
+        });
+    })(jQuery);
+</script>
+{% include 'inc/_js.html' %}

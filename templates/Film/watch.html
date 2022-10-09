@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if films.file %}
+    <video  poster="{{ films.prewiew.url }} " muted="muted" preload="auto" controls = controls    >
+        <source src="{{ films.file }}" type='video/mp4'>
+        <source src="{{ films.file.url }}" type='video/mp4'>
+    </video>
+{% else %}
+     Данный фильм не загружен.Проси извинения
+{% endif %}
+</body>
+</html>

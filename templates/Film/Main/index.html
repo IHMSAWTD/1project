@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Kinostar</title>
+{% endblock %}
+{% block bestfilm %}
+    <section class="about-us-section spad">
+        {% for best_film in object_list %}
+            {% if best_film.filmName == 'Дюна' %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="as-pic">
+                                <img src="{{ best_film.prewiew.url }}" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="as-text">
+                                <div class="section-title">
+                                    <h2>Фильм года</h2>
+                                </div>
+                                <p class="f-para">{{ best_film.filmName }} </p>
+                                <p class="s-para">
+                                    {{ best_film.description }}
+                                </p>
+                                <a href="{{ best_film.get_absolute_url }}" class="primary-btn">Смотреть онлайн</a>
+                            </div>
+                            <div class="col nav-justify-c">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block now_watching %}
+    <section class="testimonial-section spad">
+
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+
+                            <h2>Сейчас смотрят</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row testimonial-slider owl-carousel">
+
+                    {% for i in object_list %}
+                        <div class="col-lg-6">
+
+
+                            <div class="testimonial-item">
+
+                                <div class="ti-pic">
+                                    <img src="{{ i.prewiew.url }}" alt="">
+                                </div>
+                                <div class="ti-text">
+                                    <div class="ti-title">
+                                        <h4>{{ i.filmName }}</h4>
+                                    </div>
+                                    <p>{{ i.description| truncatechars:116 }} </p>
+                                </div>
+                                <br>
+
+                                <a href="{{ i.get_absolute_url }}" class="primary-btn">Смотреть онлайн</a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+    </section>
+{% endblock %}
